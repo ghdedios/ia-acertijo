@@ -15,11 +15,11 @@ public class Persona{
 	String ocupacion; 
 	//int posicion;
 	
-	String nombres [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
+	String nombres [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia"};
 	String apellidos [] = {"Martinez","Gomez","Castaño","Alcala"};
 //	String parejas [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
 	String ocupaciones [] = {"Actriz","Abogado","Acuarelista","Escritor","Administrador de correos","Apicultor","Aduanero","Arquitecto"};
-	//int posiciones [] = {1,2,3,4,5,6,7,8};
+//	int posiciones [] = {1,2,3,4,5,6,7,8};
 	
 	
 	public static Persona generarPersona(){
@@ -35,8 +35,8 @@ public class Persona{
 		return unaPersona;
 		}
 	
-	public static Persona generarPersona(String nombresDisponibles[], String apellidosDisponibles[], String parejasDisponibles[],
-										String ocupacionesDisponibles[], int posicionesDisponibles[]){
+	public static Persona generarPersona(String nombresDisponibles[], String apellidosDisponibles[],/* String parejasDisponibles[],*/
+										String ocupacionesDisponibles[]/*, int posicionesDisponibles[]*/){
 		Persona unaPersona = new Persona ();
 		
 		unaPersona.nombre = (String) UTgeNesUtils.alguno(nombresDisponibles);
@@ -50,6 +50,37 @@ public class Persona{
 		
 		return unaPersona;
 	}
+	
+	public static Persona generarHombre(String nombresDisponibles[], String apellidosDisponibles[],
+				String ocupacionesDisponibles[]){
+		Persona unaPersona = new Persona ();
+		
+		unaPersona.nombre = (String) UTgeNesUtils.alguno(nombresDisponibles);
+		unaPersona.apellido = (String) UTgeNesUtils.alguno(apellidosDisponibles);
+		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(ocupacionesDisponibles);
+
+		
+		if(unaPersona.esHombre()){
+			return unaPersona;
+		}else{
+			return generarHombre(nombresDisponibles, apellidosDisponibles, ocupacionesDisponibles);
+		}
+}
+	public static Persona generarMujer(String nombresDisponibles[], String apellidosDisponibles[],
+			String ocupacionesDisponibles[]){
+		Persona unaPersona = new Persona ();
+		
+		unaPersona.nombre = (String) UTgeNesUtils.alguno(nombresDisponibles);
+		unaPersona.apellido = (String) UTgeNesUtils.alguno(apellidosDisponibles);
+		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(ocupacionesDisponibles);
+		
+		if(unaPersona.esMujer()){
+			return unaPersona;
+		}else{
+			return generarMujer(nombresDisponibles, apellidosDisponibles, ocupacionesDisponibles);
+		}
+}
+	
 	
 
 	public String getNombre(){

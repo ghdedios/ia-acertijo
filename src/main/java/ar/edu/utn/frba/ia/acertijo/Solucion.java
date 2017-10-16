@@ -1,6 +1,9 @@
 package main.java.ar.edu.utn.frba.ia.acertijo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 
@@ -13,7 +16,6 @@ public class Solucion extends Individuo {
 		
 		double aptitud = 0;
 		
-		//TODO: Agregar condicion de que esten intercalados con mucho puntaje
 		
 		//Los numeros se relacionan con las condiciones propuestas por el enunciado presentado a la cátedra
 		if(this.uno()){ //1
@@ -67,14 +69,55 @@ public class Solucion extends Individuo {
 		return aptitud;
 	}
 
+	
+	//TODO: Refactorear generarRandom() siguiendo buenas prácticas de programacion. (Extraer logica de intercalado coherente)
 	@Override
 	public Individuo generarRandom(){
+		String[] nombresHombre = {"Alberto","Ambrosio","Alfonso","Alfredo"};
+		String[] nombresMujer = {"Angela","Aurelia","Analia","Alicia"};
+		String[]  apellidosHombre = {"Martinez","Gomez","Castaño","Alcala"};
+		String[]  apellidosMujer = {"Martinez","Gomez","Castaño","Alcala"};
+		String[] ocupaciones = {"Actriz","Abogado","Acuarelista","Escritor","Administrador de correos","Apicultor","Aduanero","Arquitecto"};
+		
 		Solucion solucion = new Solucion();
-//TODO	
-		for (int i=0; i<solucion.posibleSolucion.length; i++){
-			solucion.posibleSolucion[i] = Persona.generarPersona(); //TODO: ir pasando los posibles estados usados para generar consistencia
+		
+		solucion.posibleSolucion[0] = Persona.generarPersona();
+		if(solucion.posibleSolucion[0].esHombre()){ //Si el primero en generarse es hombre, mantengo coherencia de sentar hombre-mujer
+			solucion.posibleSolucion[1] = Persona.generarMujer(nombresMujer, apellidosMujer, ocupaciones);
+			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
+				this.removerElemento(apellidosMujer, posibleSolucion[i-2].getApellido());
+				this.removerElemento(nombresMujer, posibleSolucion[i-2].getNombre());
+				this.removerElemento(ocupaciones, posibleSolucion[i-2].getOcupacion());
+				
+				solucion.posibleSolucion[i] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
+			}
+			for(int j=2; j<solucion.posibleSolucion.length; j=j+2){
+				this.removerElemento(apellidosHombre, posibleSolucion[j-2].getApellido());
+				this.removerElemento(nombresHombre, posibleSolucion[j-2].getNombre());
+				this.removerElemento(ocupaciones, posibleSolucion[j-2].getOcupacion());
+				
+				solucion.posibleSolucion[j] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
+			}
 		}
-//TODO	
+		
+		if(solucion.posibleSolucion[0].esMujer()){ //Si el primero en generarse es mujer, mantengo coherencia de sentar mujer-hombre
+			solucion.posibleSolucion[1] = Persona.generarHombre(nombresHombre, apellidosHombre, ocupaciones);
+			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
+				this.removerElemento(apellidosHombre, posibleSolucion[i-2].getApellido());
+				this.removerElemento(nombresHombre, posibleSolucion[i-2].getNombre());
+				this.removerElemento(ocupaciones, posibleSolucion[i-2].getOcupacion());
+				
+				solucion.posibleSolucion[i] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
+			}
+			for(int j=2; j<solucion.posibleSolucion.length; j=j+2){
+				this.removerElemento(apellidosMujer, posibleSolucion[j-2].getApellido());
+				this.removerElemento(nombresMujer, posibleSolucion[j-2].getNombre());
+				this.removerElemento(ocupaciones, posibleSolucion[j-2].getOcupacion());
+				
+				solucion.posibleSolucion[j] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
+			}
+		}
+
 		
 		return solucion;
 	
@@ -280,6 +323,16 @@ public class Solucion extends Individuo {
 		return -1;
 	}
 
+	public String[] removerElemento(String[] array, String elementoABorrar) {
+	    List<String> nuevoArray = new LinkedList<String>();
+
+	    for(String item : nuevoArray)
+	        if(!elementoABorrar.equals(item))
+	            nuevoArray.add(item);
+
+	    return nuevoArray.toArray(array);
+	}
+	
 
 }
 	
