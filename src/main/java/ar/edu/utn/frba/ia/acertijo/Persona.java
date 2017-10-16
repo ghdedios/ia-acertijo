@@ -1,11 +1,7 @@
 package main.java.ar.edu.utn.frba.ia.acertijo;
 
-import java.util.ArrayList;
-import java.util.Random;
 
-import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 import main.java.ar.edu.utn.frba.ia.ag.UTgeNesUtils;
-import main.java.ar.edu.utn.frba.ia.ag.ejemplos.maximo.X;
 
 public class Persona{
 	
