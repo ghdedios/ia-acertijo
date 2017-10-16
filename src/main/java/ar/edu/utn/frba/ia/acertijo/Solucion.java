@@ -94,7 +94,7 @@ public class Solucion extends Individuo {
 	}
 	
 	private boolean dos(){
-		int posicionGomez = getHombrePorApellido("Gomez").getPosicion();
+		int posicionGomez = this.getPosicion(getHombrePorApellido("Gomez"));
 		
 		Persona izquierdaGomez = getIzquierdaDe(posicionGomez);
 		Persona derechaGomez = getDerechaDe(posicionGomez);
@@ -124,8 +124,8 @@ public class Solucion extends Individuo {
 	private boolean cuatro(){
 		
 		Persona aurelia = getPersonaPorNombre("Aurelia");
-		Persona derecha = getDerechaDe(aurelia.getPosicion());
-		Persona enFrente = getEnFrente(aurelia.getPosicion());
+		Persona derecha = getDerechaDe(this.getPosicion(aurelia));
+		Persona enFrente = getEnFrente(this.getPosicion(aurelia));
 		
 		if(derecha.getOcupacion().equalsIgnoreCase("Administrador de correos") 
 				&& enFrente.getApellido().equalsIgnoreCase("Gomez")
@@ -147,8 +147,8 @@ public class Solucion extends Individuo {
 	
 	private boolean seis(){
 		Persona alfonso = getPersonaPorNombre("Alfonso");
-		Persona izquierda = getIzquierdaDe(alfonso.getPosicion());
-		Persona derecha = getDerechaDe(alfonso.getPosicion());
+		Persona izquierda = getIzquierdaDe(this.getPosicion(alfonso));
+		Persona derecha = getDerechaDe(this.getPosicion(alfonso));
 		
 		if(izquierda.getOcupacion().equalsIgnoreCase("Apicultor") && derecha.getApellido().equalsIgnoreCase("Alcala")){
 			return true;
@@ -162,7 +162,7 @@ public class Solucion extends Individuo {
 	
 	private boolean siete(){
 		Persona alfredo = getPersonaPorNombre("Alfredo");
-		Persona enFrente = getEnFrente(alfredo.getPosicion());
+		Persona enFrente = getEnFrente(this.getPosicion(alfredo));
 		
 		if(enFrente.getOcupacion().equalsIgnoreCase("Aduanero")){
 			return true;
@@ -172,7 +172,7 @@ public class Solucion extends Individuo {
 	
 	private boolean ocho(){
 		Persona castañoHombre = getHombrePorApellido("Castaño");
-		Persona derecha = getDerechaDe(castañoHombre.getPosicion());
+		Persona derecha = getDerechaDe(this.getPosicion(castañoHombre));
 		
 		if (derecha.getNombre().equalsIgnoreCase("Alicia")){
 			return true;
@@ -201,11 +201,15 @@ public class Solucion extends Individuo {
 	}
 	
 	private Persona getPersonaPorPosicion(int posicion){
-		for(int i=0; i<posibleSolucion.length; i++){
+		/*for(int i=0; i<posibleSolucion.length; i++){
 			if(posibleSolucion[i].getPosicion()== posicion){
 				return posibleSolucion[i];
 			}
+		}*/
+		if(posibleSolucion[posicion-1] != null){
+			return posibleSolucion[posicion-1];
 		}
+		
 		return null;
 	}
 	
@@ -265,5 +269,17 @@ public class Solucion extends Individuo {
 		}
 		return getPersonaPorPosicion(posicion+4);
 	}
+		
 	
+	private int getPosicion(Persona persona){
+		for(int i=0; i<this.posibleSolucion.length;i++){
+			if (this.posibleSolucion[i].equalsPersona(persona)){
+				return i;
+			}
+		}
+		return -1;
+	}
+
+
 }
+	

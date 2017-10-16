@@ -13,13 +13,13 @@ public class Persona{
 	String apellido;
 	String pareja; //TODO: Con definir el apellido de dos personas ya se sabe quien es su pareja (y por puntuacion si no es consistente resta 1000)
 	String ocupacion; 
-	int posicion; //TODO: la posicion va a definirse en funcion de que lugar tiene de la solución
+	//int posicion; //TODO: la posicion va a definirse en funcion de que lugar tiene de la solución
 	
 	String nombres [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
 	String apellidos [] = {"Martinez","Gomez","Castaño","Alcala"};
 	String parejas [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
 	String ocupaciones [] = {"Actriz","Abogado","Acuarelista","Escritor","Administrador de correos","Apicultor","Aduanero","Arquitecto"};
-	int posiciones [] = {1,2,3,4,5,6,7,8};
+	//int posiciones [] = {1,2,3,4,5,6,7,8};
 	
 	
 	public static Persona generarPersona(){
@@ -29,7 +29,7 @@ public class Persona{
 		unaPersona.apellido = (String) UTgeNesUtils.alguno(unaPersona.apellidos);
 		unaPersona.pareja = (String) UTgeNesUtils.alguno(unaPersona.parejas);
 		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(unaPersona.ocupaciones);
-		unaPersona.posicion = 	(int)Math.random()*8;
+		//unaPersona.posicion = 	(int)Math.random()*8;
 		
 		
 		return unaPersona;
@@ -43,9 +43,9 @@ public class Persona{
 		unaPersona.apellido = (String) UTgeNesUtils.alguno(apellidosDisponibles);
 		unaPersona.pareja = (String) UTgeNesUtils.alguno(parejasDisponibles);
 		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(ocupacionesDisponibles);
-		Random rn = new Random();
+		/*Random rn = new Random();
 		int posicion = rn.nextInt(posicionesDisponibles.length - 1);
-		unaPersona.posicion = posicionesDisponibles[posicion];
+		unaPersona.posicion = posicionesDisponibles[posicion];*/
 		
 		
 		return unaPersona;
@@ -68,9 +68,9 @@ public class Persona{
 		return ocupacion;
 	}
 	
-	public int getPosicion() {
+/*	public int getPosicion() {
 		return posicion;
-	}
+	}*/
 	
 	public boolean esMujer(){
 		return this.nombre.equalsIgnoreCase("Angela") ||
@@ -84,6 +84,15 @@ public class Persona{
 				this.nombre.equalsIgnoreCase("Ambrosio") ||
 				this.nombre.equalsIgnoreCase("Alfonso") ||
 				this.nombre.equalsIgnoreCase("Alfredo");
+	}
+
+	public boolean equalsPersona(Persona otraPersona){
+		if(this.nombre.equalsIgnoreCase(otraPersona.getNombre())
+				&& this.apellido.equalsIgnoreCase(otraPersona.getApellido())
+				&& this.ocupacion.equalsIgnoreCase(otraPersona.getOcupacion())){
+			return true;
+		}
+		return false;
 	}
 
 }
