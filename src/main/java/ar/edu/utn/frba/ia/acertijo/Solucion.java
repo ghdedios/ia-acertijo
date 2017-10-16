@@ -2,7 +2,6 @@ package main.java.ar.edu.utn.frba.ia.acertijo;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 
 public class Solucion extends Individuo {
@@ -161,7 +160,6 @@ public class Solucion extends Individuo {
 		return false;
 	}
 	
-	
 	private boolean cuatro(){
 		
 		Persona aurelia = getPersonaPorNombre("Aurelia");
@@ -294,7 +292,6 @@ public class Solucion extends Individuo {
 		}
 	}
 	
-	
 	private Persona getEnFrente(int posicion){
 		if(posicion == 5){
 			return getPersonaPorPosicion(1);
@@ -311,7 +308,6 @@ public class Solucion extends Individuo {
 		return getPersonaPorPosicion(posicion+4);
 	}
 		
-	
 	private int getPosicion(Persona persona){
 		for(int i=0; i<this.posibleSolucion.length;i++){
 			if (this.posibleSolucion[i].equalsPersona(persona)){
@@ -331,6 +327,22 @@ public class Solucion extends Individuo {
 	    return nuevoArray.toArray(array);
 	}
 	
+	
+	/**************************Funciones Overrides de Individuo***********************/
+	
+	@Override
+	public String toString() {
+		String solucion = new String();
 
+		for (int i =0; i<8;i++){
+			solucion += ("Posicion " + i + " =  Nombre: " + this.posibleSolucion[i].getNombre()
+										+ "  Apellido: " + this.posibleSolucion[i].getApellido()
+										+ "  Ocupacion: " + this.posibleSolucion[i].getOcupacion());
+		}
+        
+        return "Aptitud = " + this.aptitud() + " || Genes: " + solucion;
+		
+	}
+	
 }
 	
