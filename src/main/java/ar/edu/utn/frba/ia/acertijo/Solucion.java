@@ -6,7 +6,7 @@ import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 
 public class Solucion extends Individuo {
 
-	Persona[] posibleSolucion = new Persona[8];
+	private Persona[] posibleSolucion = new Persona[8];
 	
 	@Override
 	public double aptitud() {
