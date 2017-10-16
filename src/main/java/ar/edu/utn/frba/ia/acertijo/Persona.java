@@ -11,13 +11,13 @@ public class Persona{
 	
 	String nombre;
 	String apellido;
-	String pareja; //TODO: Con definir el apellido de dos personas ya se sabe quien es su pareja (y por puntuacion si no es consistente resta 1000)
+//	String pareja; 
 	String ocupacion; 
-	//int posicion; //TODO: la posicion va a definirse en funcion de que lugar tiene de la solución
+	//int posicion;
 	
 	String nombres [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
 	String apellidos [] = {"Martinez","Gomez","Castaño","Alcala"};
-	String parejas [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
+//	String parejas [] = {"Alberto","Angela","Ambrosio","Aurelia","Analia","Alfonso","Alfredo","Alicia" };
 	String ocupaciones [] = {"Actriz","Abogado","Acuarelista","Escritor","Administrador de correos","Apicultor","Aduanero","Arquitecto"};
 	//int posiciones [] = {1,2,3,4,5,6,7,8};
 	
@@ -27,7 +27,7 @@ public class Persona{
 		
 		unaPersona.nombre = (String) UTgeNesUtils.alguno(unaPersona.nombres);
 		unaPersona.apellido = (String) UTgeNesUtils.alguno(unaPersona.apellidos);
-		unaPersona.pareja = (String) UTgeNesUtils.alguno(unaPersona.parejas);
+		//unaPersona.pareja = (String) UTgeNesUtils.alguno(unaPersona.parejas);
 		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(unaPersona.ocupaciones);
 		//unaPersona.posicion = 	(int)Math.random()*8;
 		
@@ -41,7 +41,7 @@ public class Persona{
 		
 		unaPersona.nombre = (String) UTgeNesUtils.alguno(nombresDisponibles);
 		unaPersona.apellido = (String) UTgeNesUtils.alguno(apellidosDisponibles);
-		unaPersona.pareja = (String) UTgeNesUtils.alguno(parejasDisponibles);
+		//unaPersona.pareja = (String) UTgeNesUtils.alguno(parejasDisponibles);
 		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(ocupacionesDisponibles);
 		/*Random rn = new Random();
 		int posicion = rn.nextInt(posicionesDisponibles.length - 1);
@@ -59,11 +59,11 @@ public class Persona{
 	public String getApellido(){
 		return apellido;	
 	}
-		
+/*		
 	public String getPareja(){
 		return pareja;
 	}
-		
+*/		
 	public String getOcupacion() {
 		return ocupacion;
 	}
