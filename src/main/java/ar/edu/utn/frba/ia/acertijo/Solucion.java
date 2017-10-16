@@ -1,7 +1,10 @@
 package main.java.ar.edu.utn.frba.ia.acertijo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
 
 public class Solucion extends Individuo {
@@ -81,17 +84,20 @@ public class Solucion extends Individuo {
 		solucion.posibleSolucion[0] = Persona.generarPersona();
 		if(solucion.posibleSolucion[0].esHombre()){ //Si el primero en generarse es hombre, mantengo coherencia de sentar hombre-mujer
 			solucion.posibleSolucion[1] = Persona.generarMujer(nombresMujer, apellidosMujer, ocupaciones);
-			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
-				this.removerElemento(apellidosMujer, posibleSolucion[i-2].getApellido());
-				this.removerElemento(nombresMujer, posibleSolucion[i-2].getNombre());
-				this.removerElemento(ocupaciones, posibleSolucion[i-2].getOcupacion());
+			Persona test = solucion.posibleSolucion[1]; //TODO: TEST
+			String apellido = test.getApellido();//TODO: TEST
+			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){
+				apellido = solucion.posibleSolucion[i-2].getApellido();
+				this.removerElemento(apellidosMujer, solucion.posibleSolucion[i-2].getApellido());
+				this.removerElemento(nombresMujer, solucion.posibleSolucion[i-2].getNombre());
+				this.removerElemento(ocupaciones, solucion.posibleSolucion[i-2].getOcupacion());
 				
 				solucion.posibleSolucion[i] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
 			}
 			for(int j=2; j<solucion.posibleSolucion.length; j=j+2){
-				this.removerElemento(apellidosHombre, posibleSolucion[j-2].getApellido());
-				this.removerElemento(nombresHombre, posibleSolucion[j-2].getNombre());
-				this.removerElemento(ocupaciones, posibleSolucion[j-2].getOcupacion());
+				this.removerElemento(apellidosHombre, solucion.posibleSolucion[j-2].getApellido());
+				this.removerElemento(nombresHombre, solucion.posibleSolucion[j-2].getNombre());
+				this.removerElemento(ocupaciones, solucion.posibleSolucion[j-2].getOcupacion());
 				
 				solucion.posibleSolucion[j] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
 			}
@@ -100,16 +106,16 @@ public class Solucion extends Individuo {
 		if(solucion.posibleSolucion[0].esMujer()){ //Si el primero en generarse es mujer, mantengo coherencia de sentar mujer-hombre
 			solucion.posibleSolucion[1] = Persona.generarHombre(nombresHombre, apellidosHombre, ocupaciones);
 			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
-				this.removerElemento(apellidosHombre, posibleSolucion[i-2].getApellido());
-				this.removerElemento(nombresHombre, posibleSolucion[i-2].getNombre());
-				this.removerElemento(ocupaciones, posibleSolucion[i-2].getOcupacion());
+				this.removerElemento(apellidosHombre, solucion.posibleSolucion[i-2].getApellido());
+				this.removerElemento(nombresHombre, solucion.posibleSolucion[i-2].getNombre());
+				this.removerElemento(ocupaciones, solucion.posibleSolucion[i-2].getOcupacion());
 				
 				solucion.posibleSolucion[i] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
 			}
 			for(int j=2; j<solucion.posibleSolucion.length; j=j+2){
-				this.removerElemento(apellidosMujer, posibleSolucion[j-2].getApellido());
-				this.removerElemento(nombresMujer, posibleSolucion[j-2].getNombre());
-				this.removerElemento(ocupaciones, posibleSolucion[j-2].getOcupacion());
+				this.removerElemento(apellidosMujer, solucion.posibleSolucion[j-2].getApellido());
+				this.removerElemento(nombresMujer, solucion.posibleSolucion[j-2].getNombre());
+				this.removerElemento(ocupaciones, solucion.posibleSolucion[j-2].getOcupacion());
 				
 				solucion.posibleSolucion[j] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
 			}
@@ -316,7 +322,7 @@ public class Solucion extends Individuo {
 		}
 		return -1;
 	}
-
+/*
 	public String[] removerElemento(String[] array, String elementoABorrar) {
 	    List<String> nuevoArray = new LinkedList<String>();
 
@@ -325,6 +331,13 @@ public class Solucion extends Individuo {
 	            nuevoArray.add(item);
 
 	    return nuevoArray.toArray(array);
+	}
+	*/
+	public void removerElemento(String[] array, String elementoABorrar){
+		List<String> list = new ArrayList<String>(Arrays.asList(array));
+		list.remove(elementoABorrar);
+		String[] nuevoArray = list.toArray(new String[0]);
+		array = nuevoArray;
 	}
 	
 	
