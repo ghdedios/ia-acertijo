@@ -2,7 +2,6 @@ package main.java.ar.edu.utn.frba.ia.acertijo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import main.java.ar.edu.utn.frba.ia.ag.Individuo;
@@ -337,7 +336,7 @@ public class Solucion extends Individuo {
 		String solucion = new String();
 
 		for (int i =0; i<8;i++){
-			solucion += ("Posicion " + i + " =  Nombre: " + this.posibleSolucion[i].getNombre()
+			solucion += (" Posicion " + i + " =  Nombre: " + this.posibleSolucion[i].getNombre()
 										+ "  Apellido: " + this.posibleSolucion[i].getApellido()
 										+ "  Ocupacion: " + this.posibleSolucion[i].getOcupacion());
 		}
@@ -351,6 +350,19 @@ public class Solucion extends Individuo {
 		Solucion nuevaSolucion = new Solucion();
 		nuevaSolucion.posibleSolucion = this.posibleSolucion;
 		return nuevaSolucion;
+	}
+
+	@Override
+	public void mutar(){
+		
+	}
+
+	public Persona[] getPosibleSolucion(){
+		return posibleSolucion;
+	}
+	
+	public void setPosibleSolucion(Persona [] p){
+		this.posibleSolucion = p;
 	}
 }
 	
