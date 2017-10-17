@@ -90,6 +90,7 @@ public class Solucion extends Individuo {
 				
 				solucion.posibleSolucion[j] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
 			}
+			ocupaciones = this.removerElemento(ocupaciones, solucion.posibleSolucion[6].getOcupacion());
 			solucion.posibleSolucion[1] = Persona.generarMujer(nombresMujer, apellidosMujer, ocupaciones);
 			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){
 				apellidosMujer = this.removerElemento(apellidosMujer, solucion.posibleSolucion[i-2].getApellido());
@@ -108,6 +109,7 @@ public class Solucion extends Individuo {
 				
 				solucion.posibleSolucion[j] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
 			}
+			ocupaciones = this.removerElemento(ocupaciones, solucion.posibleSolucion[6].getOcupacion());
 			solucion.posibleSolucion[1] = Persona.generarHombre(nombresHombre, apellidosHombre, ocupaciones);
 			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
 				apellidosHombre = this.removerElemento(apellidosHombre, solucion.posibleSolucion[i-2].getApellido());
@@ -179,7 +181,7 @@ public class Solucion extends Individuo {
 	}
 	
 	private boolean cinco(){
-		Persona analia = getPersonaPorNombre("Analía");
+		Persona analia = getPersonaPorNombre("Analia");
 		if(analia.getApellido().equalsIgnoreCase("Castaño")){
 			return true;
 		}
@@ -280,10 +282,10 @@ public class Solucion extends Individuo {
 	}
 	
 	private Persona getDerechaDe(int posicion){
-		if(posicion == 1){
+		if(posicion == 0){
 			return getPersonaPorPosicion(8);
 		}else{
-			return getPersonaPorPosicion(posicion-1);
+			return getPersonaPorPosicion(posicion+1);
 		}
 	}
 	
@@ -319,17 +321,7 @@ public class Solucion extends Individuo {
 		}
 		return -1;
 	}
-/*
-	public String[] removerElemento(String[] array, String elementoABorrar) {
-	    List<String> nuevoArray = new LinkedList<String>();
 
-	    for(String item : nuevoArray)
-	        if(!elementoABorrar.equals(item))
-	            nuevoArray.add(item);
-
-	    return nuevoArray.toArray(array);
-	}
-	*/
 	public String[] removerElemento(String[] array, String elementoABorrar){
 		List<String> list = new ArrayList<String>(Arrays.asList(array));
 		list.remove(elementoABorrar);
@@ -354,5 +346,11 @@ public class Solucion extends Individuo {
 		
 	}
 	
+	@Override
+	public Individuo clone(){
+		Solucion nuevaSolucion = new Solucion();
+		nuevaSolucion.posibleSolucion = this.posibleSolucion;
+		return nuevaSolucion;
+	}
 }
 	
