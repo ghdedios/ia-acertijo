@@ -23,9 +23,7 @@ public class Persona{
 		
 		unaPersona.nombre = (String) UTgeNesUtils.alguno(unaPersona.nombres);
 		unaPersona.apellido = (String) UTgeNesUtils.alguno(unaPersona.apellidos);
-		//unaPersona.pareja = (String) UTgeNesUtils.alguno(unaPersona.parejas);
 		unaPersona.ocupacion = (String) UTgeNesUtils.alguno(unaPersona.ocupaciones);
-		//unaPersona.posicion = 	(int)Math.random()*8;
 		
 		
 		return unaPersona;

@@ -83,17 +83,6 @@ public class Solucion extends Individuo {
 		
 		solucion.posibleSolucion[0] = Persona.generarPersona();
 		if(solucion.posibleSolucion[0].esHombre()){ //Si el primero en generarse es hombre, mantengo coherencia de sentar hombre-mujer
-			solucion.posibleSolucion[1] = Persona.generarMujer(nombresMujer, apellidosMujer, ocupaciones);
-			Persona test = solucion.posibleSolucion[1]; //TODO: TEST
-			String apellido = test.getApellido();//TODO: TEST
-			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){
-				apellido = solucion.posibleSolucion[i-2].getApellido();
-				this.removerElemento(apellidosMujer, solucion.posibleSolucion[i-2].getApellido());
-				this.removerElemento(nombresMujer, solucion.posibleSolucion[i-2].getNombre());
-				this.removerElemento(ocupaciones, solucion.posibleSolucion[i-2].getOcupacion());
-				
-				solucion.posibleSolucion[i] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
-			}
 			for(int j=2; j<solucion.posibleSolucion.length; j=j+2){
 				this.removerElemento(apellidosHombre, solucion.posibleSolucion[j-2].getApellido());
 				this.removerElemento(nombresHombre, solucion.posibleSolucion[j-2].getNombre());
@@ -101,23 +90,31 @@ public class Solucion extends Individuo {
 				
 				solucion.posibleSolucion[j] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
 			}
+			solucion.posibleSolucion[1] = Persona.generarMujer(nombresMujer, apellidosMujer, ocupaciones);
+			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){
+				this.removerElemento(apellidosMujer, solucion.posibleSolucion[i-2].getApellido());
+				this.removerElemento(nombresMujer, solucion.posibleSolucion[i-2].getNombre());
+				this.removerElemento(ocupaciones, solucion.posibleSolucion[i-2].getOcupacion());
+				
+				solucion.posibleSolucion[i] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
+			}
 		}
 		
 		if(solucion.posibleSolucion[0].esMujer()){ //Si el primero en generarse es mujer, mantengo coherencia de sentar mujer-hombre
 			solucion.posibleSolucion[1] = Persona.generarHombre(nombresHombre, apellidosHombre, ocupaciones);
-			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
-				this.removerElemento(apellidosHombre, solucion.posibleSolucion[i-2].getApellido());
-				this.removerElemento(nombresHombre, solucion.posibleSolucion[i-2].getNombre());
-				this.removerElemento(ocupaciones, solucion.posibleSolucion[i-2].getOcupacion());
-				
-				solucion.posibleSolucion[i] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
-			}
 			for(int j=2; j<solucion.posibleSolucion.length; j=j+2){
 				this.removerElemento(apellidosMujer, solucion.posibleSolucion[j-2].getApellido());
 				this.removerElemento(nombresMujer, solucion.posibleSolucion[j-2].getNombre());
 				this.removerElemento(ocupaciones, solucion.posibleSolucion[j-2].getOcupacion());
 				
 				solucion.posibleSolucion[j] = Persona.generarMujer(nombresMujer,apellidosMujer, ocupaciones);
+			}
+			for(int i=3; i<solucion.posibleSolucion.length; i=i+2){	
+				this.removerElemento(apellidosHombre, solucion.posibleSolucion[i-2].getApellido());
+				this.removerElemento(nombresHombre, solucion.posibleSolucion[i-2].getNombre());
+				this.removerElemento(ocupaciones, solucion.posibleSolucion[i-2].getOcupacion());
+				
+				solucion.posibleSolucion[i] = Persona.generarHombre(nombresHombre,apellidosHombre, ocupaciones);
 			}
 		}
 
@@ -131,7 +128,7 @@ public class Solucion extends Individuo {
 	
 	
 	private boolean uno(){
-		if (getMujerPorApellido("Martinez").getOcupacion().equalsIgnoreCase("Actriz")
+		if (this.getMujerPorApellido("Martinez").getOcupacion().equalsIgnoreCase("Actriz")
 				&& 
 				getPersonaPorNombre("Alfredo").getOcupacion().equalsIgnoreCase("Abogado")){
 			return true;
@@ -259,10 +256,10 @@ public class Solucion extends Individuo {
 	}
 	
 	private Persona getMujerPorApellido(String apellido) {
-		for(int i=0; i<posibleSolucion.length; i++){
-			if(posibleSolucion[i].getApellido().equalsIgnoreCase(apellido)){
-				if(posibleSolucion[i].esMujer()){
-					return posibleSolucion[i];	
+		for(int i=0; i<this.posibleSolucion.length; i++){
+			if(this.posibleSolucion[i].getApellido().equalsIgnoreCase(apellido)){
+				if(this.posibleSolucion[i].esMujer()){
+					return this.posibleSolucion[i];	
 				}
 			}
 		}
@@ -271,10 +268,10 @@ public class Solucion extends Individuo {
 	}
 	
 	private Persona getHombrePorApellido(String apellido) {
-		for(int i=0; i<posibleSolucion.length; i++){
-			if(posibleSolucion[i].getApellido().equalsIgnoreCase(apellido)){
-				if(posibleSolucion[i].esHombre()){
-					return posibleSolucion[i];	
+		for(int i=0; i<this.posibleSolucion.length; i++){
+			if(this.posibleSolucion[i].getApellido().equalsIgnoreCase(apellido)){
+				if(this.posibleSolucion[i].esHombre()){
+					return this.posibleSolucion[i];	
 				}
 			}
 		}
